@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Panic Button{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Panic Button</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% comment %} <button type="submit" name="preview" class="btn btn-warning">Preview Email</button> {% endcomment %}
+        <button type="submit" name="send" class="btn btn-danger">Send Email</button>
+        {% comment %} <button type="submit" name="send" class="btn btn-primary">Send Email</button> {% endcomment %}
+    </form>
+</div>
+{% endblock %}

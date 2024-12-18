@@ -1,0 +1,22 @@
+{% comment %} {% extends "base.html" %}
+{% block title %}Email Preview{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Email Preview</h2>
+    <p><strong>To:</strong> {{ recipients|join:", " }}</p>
+    <p><strong>Message:</strong></p>
+    <pre>{{ message }}</pre>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" name="send" class="btn btn-danger">Send Email</button>
+    </form>
+
+    <a href="{% url 'panic' %}">Go back and edit</a>
+
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+</div>
+{% endblock %} {% endcomment %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load custom_filter %}
+
+{% block title %}
+Contacts for Help
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Manage Your Contacts</h2>
+
+    <!-- Contact Form -->
+    <form method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Name</label>
+            {{ form.name|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_email" class="form-label">Email</label>
+            {{ form.email|add_class:"form-control" }}
+        </div>
+        <button type="submit" class="btn btn-success w-100">Add Contact</button>
+    </form>
+
+    <!-- List of Existing Contacts -->
+    <h3 class="mt-4">Saved Contacts</h3>
+    <ul class="list-group">
+        {% for contact in contacts %}
+        <li class="list-group-item d-flex justify-content-between ">
+            <div>
+                <strong>{{ contact.name }}</strong> - {{ contact.email }}
+            </div>
+            <a href="{% url 'delete_contact' contact.pk %}" class="btn btn-danger btn-sm">
+                Delete
+            </a>
+        </li>
+        {% empty %}
+        <li class="list-group-item text-muted">No contacts available. Add a new one above!</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

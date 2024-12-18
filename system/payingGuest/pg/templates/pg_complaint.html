@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+{% block title %}
+Paying Guest Complaint
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4"> Welcome to the Paying Guest Management System! </h1>
+
+<h1 class="text-center">Submit a Complaint</h1>
+<form method="post" class="p-4 border rounded">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="id_email" class="form-label">Email</label>
+        {{ form.email|add_class:"form-control" }}
+    </div>
+
+    <div class="mb-3">
+        <label for="id_complaint" class="form-label">Complaint</label>
+        {{ form.complaint|add_class:"form-control" }}
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Send Complaint</button>
+    </div>
+</form>
+
+
+
+
+
+
+{% comment %} <h1>Submit a Complaint</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send Complaint</button>
+</form> {% endcomment %}
+
+
+{% endblock %}

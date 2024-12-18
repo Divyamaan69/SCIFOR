@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+Paying Guest
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4"> Welcome to the Paying Guest Management System! </h1>
+
+{% if already_created %}
+  <p>You have filled the form. Thank you!!</p>
+{% else %}
+  <a class="btn btn-primary mb-4" href="{% url 'pg_create' %}">
+    Fill your Form
+  </a>
+{% endif %} 
+
+<div class="container row gap-3">
+    {% for PG in PGs %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{PG.photo.url}}" class="card-img-top" alt="default.jpg">
+        <div class="card-body">
+          <h5 class="card-title">Name - {{PG.user}}</h5>
+          <p class="card-text">Location - {{PG.location}}</p>
+          <p class="card-text">Room type - {{PG.room}}</p>
+          <p class="card-text">Price - {{PG.price}}</p>
+          <p class="card-text">Food preference - {{PG.food}}</p>
+          {% if PG.user == user %}
+          <a href="{% url 'pg_edit' PG.id %}" class="btn btn-primary">Change details</a>
+          <a href="{% url 'pg_delete' PG.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  <a class="btn btn-primary mb-4 mt-4" href="{% url 'send_complaint' %}">
+      Send Complaint
+  </a> 
+</form>
+
+{% endblock %}

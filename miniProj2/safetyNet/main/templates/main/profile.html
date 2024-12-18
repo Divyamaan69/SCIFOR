@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load custom_filter %}
+
+{% block title %}
+SFW - Profile
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4"> 
+    Welcome to the SafetyNet for Women
+</h1>
+
+<h2 class='text-center mt-4'>
+    {% comment %} {% if form.instance.pk %} {% endcomment %}
+    {% comment %} Change details
+    {% else %} {% endcomment %}
+    Create your Profile
+    {% comment %} {% endif %} {% endcomment %}
+
+    <form method="post" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_user" class="form-label">User</label>
+            {{ form.user|add_class:"form-select" }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_date_of_birth" class="form-label">Date of Birth</label>
+            {{ form.date_of_birth|add_class:"form-control" }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_height" class="form-label">Height</label>
+            {{ form.height|add_class:"form-control" }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_weight" class="form-label">Weight</label>
+            {{ form.weight|add_class:"form-control" }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_city" class="form-label">City</label>
+            {{ form.city|add_class:"form-control" }}
+        </div>
+        
+        <div class="mb-3">
+            <label for="id_govt_id" class="form-label">Government ID Proof</label>
+            {{ form.govt_id|add_class:"form-control" }}
+        </div>
+        
+        <button class="btn btn-warning w-100" type="submit">
+            Confirm Details
+        </button>
+    </form>    
+
+    <a href="{% url 'home' %}"> Back to Home page</a>
+</h2>
+{% endblock %}
