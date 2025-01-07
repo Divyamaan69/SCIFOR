@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <title>YouTube Video Downloader</title>
+</head>
+<body>
+    <h1>YouTube Video Downloader</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="video_url">YouTube Video URL:</label>
+        <input type="text" name="video_url" required>
+        <button type="submit">Download</button>
+    </form>
+</body>
+</html>

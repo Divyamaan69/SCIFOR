@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ writing.title }}</title>
+</head>
+<body>
+    <h1>{{ writing.title }}</h1>
+    <p>{{ writing.description }}</p>
+    <p><strong>Published on:</strong> {{ writing.publication_date }}</p>
+    {% if writing.link %}
+        <a href="{{ writing.link }}">Read More</a>
+    {% endif %}
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

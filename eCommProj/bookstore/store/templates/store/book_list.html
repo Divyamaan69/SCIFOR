@@ -1,0 +1,20 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<h2>Available Books</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    {% for book in books %}
+        <div style="border: 1px solid #966919; padding: 10px; width: 200px; text-align: center;">
+            <img src="{{ book.image.url }}" alt="{{ book.title }}" style="width: 100px; height: 150px;">
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>Price: ₹{{ book.price }}</p>
+            <a href="/book/{{ book.id }}/" class="btn">View Details</a>
+            <form method="post" action="{% url 'add_to_cart' book.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn cart-btn">Add to Cart</button>
+            </form>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

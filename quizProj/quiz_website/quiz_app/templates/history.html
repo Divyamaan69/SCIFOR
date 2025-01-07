@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Quiz History</h1>
+<ul>
+    {% for record in history %}
+        <li>{{ record.date_taken }}: Score - {{ record.score }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
