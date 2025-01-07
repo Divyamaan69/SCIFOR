@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Product
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="mb-4">Are you sure you want to delete "{{ product.name }}"?</h2>
+    <form method="post" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+        <div class="w-50 mb-3">
+            <button type="submit" class="btn btn-danger w-100">Yes, Delete</button>
+        </div>
+        <div class="w-50">
+            <a href="{% url 'farmer_dashboard' %}" class="btn btn-secondary w-100">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

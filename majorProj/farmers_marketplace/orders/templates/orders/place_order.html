@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <!-- Center the heading -->
+    <h2 class="text-center mb-4">Place Your Order</h2>
+
+    <!-- Form for Address, Phone, and Email -->
+    <form method="post" class="mb-5">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <label for="address" class="col-md-4 col-form-label text-end">Address:</label>
+            <div class="col-md-6">
+                <input type="text" name="address" id="address" required class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="phone" class="col-md-4 col-form-label text-end">Phone Number:</label>
+            <div class="col-md-6">
+                <input type="text" name="phone" id="phone" required class="form-control">
+            </div>
+        </div>
+        <div class="row mb-4">
+            <label for="email" class="col-md-4 col-form-label text-end">Email ID:</label>
+            <div class="col-md-6">
+                <input type="email" name="email" id="email" required class="form-control">
+            </div>
+        </div>
+
+        <!-- Order Summary -->
+        <h3 class="text-center mb-4">Order Summary</h3>
+        <div class="d-flex justify-content-center">
+            <table class="table table-bordered w-75 text-center">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>Rs.{{ item.product.price }}/-</td>
+                        <td>Rs.{{ item.total_price }}/-</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total Amount and Confirm Order -->
+        <div class="d-flex justify-content-between align-items-center w-75 mx-auto mt-4">
+            <h4 class="fw-bold">Total Amount: Rs.{{ total_price }}/-</h4>
+            <button type="submit" class="btn btn-success">Confirm Order</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Manage Orders</h2>
+{% if orders %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Buyer</th>
+                <th>Products</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.buyer.username }}</td>
+                <td>
+                    {% for product in order.products.all %}
+                    {{ product.name }}<br>
+                    {% endfor %}
+                </td>
+                <td>Rs. {{ order.total_price }}</td>
+                <td>{{ order.get_status_display }}</td>
+                <td>{{ order.timestamp }}</td>
+                <td>
+                    <a href="{% url 'change_order_status' order.id %}" class="btn btn-warning">Change Status</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No orders found.</p>
+{% endif %}
+{% endblock %}

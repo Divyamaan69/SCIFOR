@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Add Product
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="mb-4">Add New Product</h2>
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+
+        <!-- Product Name -->
+        <div class="mb-3 w-50 text-start">
+            <label for="product_name" class="form-label">Product Name</label>
+            {{ form.name|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Category -->
+        <div class="mb-3 w-50 text-start">
+            <label for="category" class="form-label">Category</label>
+            {{ form.category|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Price -->
+        <div class="mb-3 w-50 text-start">
+            <label for="price" class="form-label">Price (Rs.)</label>
+            {{ form.price|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Quantity -->
+        <div class="mb-3 w-50 text-start">
+            <label for="quantity" class="form-label">Quantity</label>
+            {{ form.quantity|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Image -->
+        <div class="mb-3 w-50 text-start">
+            <label for="image" class="form-label">Product Image</label>
+            {{ form.image|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="w-50 mb-3">
+            <button type="submit" class="btn btn-success w-100">Add Product</button>
+        </div>
+        <div class="w-50">
+            <a href="{% url 'farmer_dashboard' %}" class="btn btn-secondary w-100">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}
+Add Product
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="mb-4">Add New Product</h2>
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+
+        {{ form.as_p }} 
+        
+        {% comment %} <!-- Product Name -->
+        <div class="mb-3 w-50 text-start">
+            <label for="product_name" class="form-label">Product Name</label>
+            <input type="text" id="product_name" name="product_name" class="form-control" required>
+        </div>
+        
+        <!-- Product Category -->
+        <div class="mb-3 w-50 text-start">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" id="category" name="category" class="form-control" required>
+        </div>
+        
+        <!-- Product Price -->
+        <div class="mb-3 w-50 text-start">
+            <label for="price" class="form-label">Price (Rs.)</label>
+            <input type="number" id="price" name="price" class="form-control" required>
+        </div>
+        
+        <!-- Product Quantity -->
+        <div class="mb-3 w-50 text-start">
+            <label for="quantity" class="form-label">Quantity</label>
+            <input type="number" id="quantity" name="quantity" class="form-control" required>
+        </div>
+
+        <!-- Product Image -->
+        <div class="mb-3 w-50 text-start">
+            <label for="image" class="form-label">Product Image</label>
+            <input type="file" id="image" name="image" class="form-control" accept="image/*">
+        </div> {% endcomment %}
+
+        <!-- Submit and Cancel Buttons -->
+        {% comment %} <div class="w-50 mb-3">
+            <button type="submit" class="btn btn-success w-100">Add Product</button>
+        </div>
+        <div class="w-50">
+            <a href="{% url 'farmer_dashboard' %}" class="btn btn-secondary w-100">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %} {% endcomment %} 

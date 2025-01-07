@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Order History</h2>
+
+    {% if orders %}
+    <table class="table table-bordered w-100 mx-auto">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Total Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>#{{ order.id }}</td>
+                <td>₹{{ order.total_price }}</td>
+                <td>{{ order.get_status_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No orders found.</p>
+    {% endif %}
+
+    <a href="{% url 'buyer_home' %}" class="btn btn-primary w-100 mt-3 mb-3">Return to Dashboard</a>
+</div>
+{% endblock %}
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<h2>Order History</h2>
+
+{% if orders %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Products</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>#{{ order.id }}</td>
+            <td>
+                <ul>
+                    {% for product in order.products.all %}
+                    <li>{{ product.name }} (₹{{ product.price }})</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>₹{{ order.total_price }}</td>
+            <td>{{ order.get_status_display }}</td>
+            <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No orders found.</p>
+{% endif %}
+<a href="{% url 'buyer_home' %}" class="btn btn-primary mt-3">Return to Dashboard</a>
+{% endblock %} {% endcomment %}

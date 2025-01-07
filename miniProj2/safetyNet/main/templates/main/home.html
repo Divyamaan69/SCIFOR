@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SafetyNet for Women
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mt-4"> Welcome to the SafetyNet for Women!</h1>
+
+{% if already_created %}
+  <p>You have filled the profile. Thank you!!</p>
+{% else %}
+  <a class="btn btn-primary mb-2 w-100" href="{% url 'profile' %}">
+    Fill your Personal Profile
+  </a>
+{% endif %} 
+
+<div class="container row gap-3 my-3">
+    {% for pf in pfs %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{pf.govt_id.url}}" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Name - {{pf.user}}</h5>
+          <p class="card-text">Date of Birth - {{pf.date_of_birth}}</p>
+          <p class="card-text">Height - {{pf.height}} cm</p>
+          <p class="card-text">Weight - {{pf.weight}} kg</p>
+          <p class="card-text">City - {{pf.city}}</p>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+<div class="d-flex justify-content-between mb-4">
+  <a class="btn btn-primary w-50 mx-2" href="panic">
+    PANIC
+  </a>
+  <a class="btn btn-primary w-50 mx-2" href="contacts">
+    Your Contacts
+  </a>
+</div>
+
+<div class="text-center my-3">
+  <button id="playButton" class="btn btn-danger btn-md w-100 my-2">
+    Play Loud Noise
+  </button>
+  <button id="pauseButton" class="btn btn-warning btn-md w-100 my-2" style="display:none;">
+    Pause
+  </button>
+</div>
+
+<script>
+    // Variable to store the audio object
+    document.addEventListener('DOMContentLoaded', function () {
+        let audio = new Audio("{% static 'sounds/loud_noise.mp3' %}");
+    
+        // Check if the audio file is loaded properly
+            audio.oncanplaythrough = function() {
+                console.log("Audio loaded and ready to play!");
+            }
+        
+            audio.onerror = function() {
+                console.error("Failed to load the audio file. Please check the path.");
+            }
+        
+            let isPlaying = false;
+        
+            // Play button functionality
+            document.getElementById('playButton').addEventListener('click', function () {
+                if (!isPlaying) {
+                    // Play the sound
+                    audio.play().then(() => {
+                        // Show pause button and change play button text
+                        document.getElementById('pauseButton').style.display = 'inline-block';
+                        document.getElementById('playButton').style.display = 'none';
+                        isPlaying = true;
+                    }).catch(error => {
+                        console.error("Error playing audio:", error);
+                    });
+                }
+            });
+        
+            // Pause button functionality
+            document.getElementById('pauseButton').addEventListener('click', function () {
+                if (isPlaying) {
+                    // Pause the sound
+                    audio.pause();
+                    // Show play button and change pause button text
+                    document.getElementById('pauseButton').style.display = 'none';
+                    document.getElementById('playButton').style.display = 'inline-block';
+                    isPlaying = false;
+                }
+            });
+        });
+</script>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+SafetyNet for Women
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mt-4"> Welcome to the SafetyNet for Women!</h1>
+
+{% if already_created %}
+  <p>You have filled the profile. Thank you!!</p>
+{% else %}
+  <a class="btn btn-primary mb-4" href="{% url 'profile' %}">
+    Fill your Personal Profile
+  </a>
+{% endif %} 
+
+<div class="container row gap-3">
+    {% for pf in pfs %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{pf.govt_id.url}}" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Name - {{pf.user}}</h5>
+          <p class="card-text">Date of Birth - {{pf.date_of_birth}}</p>
+          <p class="card-text">Height - {{pf.height}} cm</p>
+          <p class="card-text">Weight - {{pf.weight}} kg</p>
+          <p class="card-text">City - {{pf.city}}</p>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <a class="btn btn-primary mb-4 mt-4" href="panic">
+        PANIC
+    </a> 
+</form>
+
+
+<form method="post">
+ {% csrf_token %}
+    <a class="btn btn-primary mb-4 mt-4" href="contacts">
+        Your Contacts
+    </a> 
+</form>
+
+
+<div class="mt-4 text-center">
+    <button id="playButton" class="btn btn-warning btn-lg">
+        Play Loud Noise
+    </button>
+    <button id="pauseButton" class="btn btn-secondary btn-lg ms-3" style="display:none;">
+        Pause
+    </button>
+</div>
+
+<script>
+    // Variable to store the audio object
+    document.addEventListener('DOMContentLoaded', function () {
+        let audio = new Audio("{% static 'sounds/loud_noise.mp3' %}");
+    
+        // Check if the audio file is loaded properly
+            audio.oncanplaythrough = function() {
+                console.log("Audio loaded and ready to play!");
+            }
+        
+            audio.onerror = function() {
+                console.error("Failed to load the audio file. Please check the path.");
+            }
+        
+            let isPlaying = false;
+        
+            // Play button functionality
+            document.getElementById('playButton').addEventListener('click', function () {
+                if (!isPlaying) {
+                    // Play the sound
+                    audio.play().then(() => {
+                        // Show pause button and change play button text
+                        document.getElementById('pauseButton').style.display = 'inline-block';
+                        document.getElementById('playButton').style.display = 'none';
+                        isPlaying = true;
+                    }).catch(error => {
+                        console.error("Error playing audio:", error);
+                    });
+                }
+            });
+        
+            // Pause button functionality
+            document.getElementById('pauseButton').addEventListener('click', function () {
+                if (isPlaying) {
+                    // Pause the sound
+                    audio.pause();
+                    // Show play button and change pause button text
+                    document.getElementById('pauseButton').style.display = 'none';
+                    document.getElementById('playButton').style.display = 'inline-block';
+                    isPlaying = false;
+                }
+            });
+        });
+        
+</script>
+
+{% endblock %} {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

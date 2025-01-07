@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Send Message{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center mb-4">Contact Farmer about {{ product.name }}</h2>
+
+    <form method="post" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+        
+        <!-- Make the message and its input box look beautiful -->
+        <div class="mb-3 w-75">
+            <label for="message" class="form-label">Message:</label>
+            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Write your message here..." required></textarea>
+        </div>
+
+        <!-- Form submission buttons with equal width -->
+        <div class="d-flex justify-content-between w-75">
+            <button type="submit" class="btn btn-primary w-48">Send Message</button>
+            <a href="{% url 'product_detail' product.pk %}" class="btn btn-secondary w-48 text-center">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

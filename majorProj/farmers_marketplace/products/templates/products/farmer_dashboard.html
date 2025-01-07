@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Farmer Dashboard{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>My Products</h2>
+    <a href="{% url 'add_product' %}" class="btn btn-primary mb-3 w-100">Add New Product</a>
+
+    <!-- Inbox Button -->
+    <a href="{% url 'farmer_inbox' %}" class="btn btn-info mb-3 w-100">Check Messages</a>
+
+    <table class="table table-striped mt-4 mx-auto" style="width: 80%;">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                    {% else %}
+                    No Image
+                    {% endif %}
+                </td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.quantity }}kg</td>
+                <td>Rs.{{ product.price }}/-</td>
+                <td>
+                    <a href="{% url 'edit_product' product.pk %}" class="btn btn-sm btn-warning w-100">Edit</a>
+                    <a href="{% url 'delete_product' product.pk %}" class="btn btn-sm btn-danger w-100">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Farmer Dashboard{% endblock %}
+
+{% block content %}
+<h2>My Products</h2>
+<a href="{% url 'add_product' %}" class="btn btn-primary mb-3">Add New Product</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            <td>
+                {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                {% else %}
+                No Image
+                {% endif %}
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}kg</td>
+            <td>Rs.{{ product.price }}/-</td>
+            <td>
+                <a href="{% url 'edit_product' product.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'delete_product' product.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %} {% endcomment %}

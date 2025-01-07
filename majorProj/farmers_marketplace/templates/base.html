@@ -1,0 +1,373 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FarmLink{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        /* Full width for the search button */
+        .search-btn {
+            width: 100%;
+        }
+
+        /* All images should be the same size */
+        .card-img-top {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* All cards should have the same size and shadow on hover */
+        .card {
+            height: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Full width for View Details and View Cart buttons */
+        .btn-full-width {
+            width: 100%;
+        }
+
+        /* Center the paginator number */
+        .pagination .page-item.active .page-link {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">FarmLink</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    {% if user.role == 'FARMER' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'farmer_dashboard' %}">Farmer Dashboard</a>
+                        </li>
+                    {% elif user.role == 'BUYER' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'buyer_home' %}">Buyer Home</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="container mt-4">
+        {% block content %}
+
+        <!-- Example of search button with full width -->
+        <input type="text" class="form-control search-btn" placeholder="Search...">
+
+        <!-- Example of cards with images, same size, and hover effect -->
+        <div class="card-deck mt-4">
+            <div class="card">
+                <img class="card-img-top" src="https://via.placeholder.com/300" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Product Name</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary btn-full-width">View Details</a>
+                    <a href="#" class="btn btn-secondary btn-full-width">Add to Cart</a>
+                </div>
+            </div>
+            <!-- Repeat other cards here -->
+        </div>
+
+        <!-- Example of paginator with centered number -->
+        <nav>
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <!-- Add more pagination items here -->
+            </ul>
+        </nav>
+
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+ {% endcomment %}
+
+
+ {% comment %} <!DOCTYPE html>
+ <html lang="en" data-bs-theme="dark">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>{% block title %}FarmLink{% endblock %}</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+     <style>
+         /* Full width for the search button */
+         .search-btn {
+             width: 100%;
+         }
+ 
+         /* All images should be the same size */
+         .card-img-top {
+             width: 100%;
+             height: 200px;
+             object-fit: cover;
+         }
+ 
+         /* All cards should have the same size and shadow on hover */
+         .card {
+             height: 100%;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+             transition: box-shadow 0.3s ease;
+         }
+         
+         .card:hover {
+             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+         }
+ 
+         /* Full width for View Details and View Cart buttons */
+         .btn-full-width {
+             width: 100%;
+         }
+ 
+         /* Center the paginator number */
+         .pagination .page-item.active .page-link {
+             text-align: center;
+         }
+     </style>
+ </head>
+ <body>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+         <a class="navbar-brand" href="/">FarmLink</a>
+         <div class="collapse navbar-collapse">
+             <ul class="navbar-nav ml-auto">
+                 {% if user.is_authenticated %}
+                     {% if user.role == 'FARMER' %}
+                         <li class="nav-item">
+                             <a class="nav-link" href="{% url 'farmer_dashboard' %}">Farmer Dashboard</a>
+                         </li>
+                     {% elif user.role == 'BUYER' %}
+                         <li class="nav-item">
+                             <a class="nav-link" href="{% url 'buyer_home' %}">Buyer Home</a>
+                         </li>
+                     {% endif %}
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                     </li>
+                 {% else %}
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'login' %}">Login</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'register' %}">Register</a>
+                     </li>
+                 {% endif %}
+             </ul>
+         </div>
+     </nav>
+ 
+     <div class="container mt-4">
+         {% block content %}
+ 
+         <!-- Example of search button with full width -->
+         <div class="mb-4">
+             <input type="text" class="form-control search-btn" placeholder="Search...">
+         </div>
+ 
+         <!-- Example of cards with images, same size, and hover effect -->
+         <div class="row row-cols-1 row-cols-md-3 g-4">
+             <div class="col">
+                 <div class="card h-100">
+                     <img class="card-img-top" src="https://via.placeholder.com/300" alt="Card image cap">
+                     <div class="card-body">
+                         <h5 class="card-title">Product Name</h5>
+                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                         <a href="#" class="btn btn-primary btn-full-width">View Details</a>
+                         <a href="#" class="btn btn-secondary btn-full-width">Add to Cart</a>
+                     </div>
+                 </div>
+             </div>
+             <!-- Repeat other cards here -->
+         </div>
+ 
+         <!-- Example of paginator with centered number -->
+         <nav>
+             <ul class="pagination justify-content-center mt-4">
+                 <li class="page-item">
+                     <a class="page-link" href="#">1</a>
+                 </li>
+                 <!-- Add more pagination items here -->
+             </ul>
+         </nav>
+ 
+         {% endblock %}
+     </div>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+ </body>
+ </html> {% endcomment %}
+ 
+
+
+
+
+
+ {% load custom_filters %}
+
+
+ <!DOCTYPE html>
+ <html lang="en" data-bs-theme="dark">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>{% block title %}FarmLink{% endblock %}</title>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+ </head>
+ <body>
+    {% block navbar %}
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/" style="font-family: 'Arial', sans-serif; font-size: 28px; font-weight: bold; color: #FF6F61; letter-spacing: 2px;">FarmLink</a>
+         <div class="collapse navbar-collapse">
+             <ul class="navbar-nav ms-auto">
+                 {% if user.is_authenticated %}
+                     {% if user.role == 'FARMER' %}
+                         <li class="nav-item">
+                             <a class="btn btn-success" href="{% url 'farmer_dashboard' %}">Farmer Dashboard</a>
+                         </li>
+                     {% elif user.role == 'BUYER' %}
+                         <li class="nav-item ms-auto">
+                             <a class="btn btn-success" href="{% url 'buyer_home' %}">Home</a>
+                         </li>
+                     {% endif %}
+                     {% comment %} <li class="nav-item">
+                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                     </li> {% endcomment %}
+                     {% else %}
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'login' %}">Login</a>
+                     </li>
+                     <li class="nav-item">
+                         <a class="nav-link" href="{% url 'register' %}">Register</a>
+                     </li>
+                 {% endif %}
+             </ul>
+         </div>
+     </nav>
+    {% endblock %}
+ 
+     <div class="container mt-4">
+         {% block content %}
+ 
+         <!-- Search button with full width -->
+         <div class="mb-4">
+             <input type="text" class="form-control w-100" placeholder="Search...">
+         </div>
+ 
+         <!-- Cards with uniform size and hover effect -->
+         <div class="row row-cols-1 row-cols-md-3 g-4">
+             <div class="col">
+                 <div class="card h-100 shadow-sm">
+                     <img class="card-img-top" src="https://via.placeholder.com/300" alt="Card image cap" style="height: 200px; object-fit: cover;">
+                     <div class="card-body">
+                         <h5 class="card-title">Product Name</h5>
+                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                         <a href="#" class="btn btn-primary w-100">View Details</a>
+                         <a href="#" class="btn btn-secondary w-100">Add to Cart</a>
+                     </div>
+                 </div>
+             </div>
+             <!-- Repeat other cards here -->
+         </div>
+ 
+         <!-- Paginator with centered number -->
+         <nav>
+             <ul class="pagination justify-content-center mt-4">
+                 <li class="page-item">
+                     <a class="page-link" href="#">1</a>
+                 </li>
+                 <!-- Add more pagination items here -->
+             </ul>
+         </nav>
+ 
+         {% endblock %}
+     </div>
+ 
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+ </body>
+ </html>
+ 
+
+
+
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FarmLink{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="/">FarmLink</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    {% if user.role == 'FARMER' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'farmer_dashboard' %}">Farmer Dashboard</a>
+                        </li>
+                    {% elif user.role == 'BUYER' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'buyer_home' %}">Buyer Home</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    
+
+    <div class="container mt-4">
+        {% block content %}
+        <!-- Child template content will go here -->
+        {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> {% endcomment %}
+

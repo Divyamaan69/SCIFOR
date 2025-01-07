@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Edit Product
+{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="mb-4">Edit Product</h2>
+    <form method="post" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+        {% csrf_token %}
+        
+          <!-- Product Name -->
+          <div class="mb-3 w-50 text-start">
+            <label for="product_name" class="form-label">Product Name</label>
+            {{ form.name|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Category -->
+        <div class="mb-3 w-50 text-start">
+            <label for="category" class="form-label">Category</label>
+            {{ form.category|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Price -->
+        <div class="mb-3 w-50 text-start">
+            <label for="price" class="form-label">Price (Rs.)</label>
+            {{ form.price|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Quantity -->
+        <div class="mb-3 w-50 text-start">
+            <label for="quantity" class="form-label">Quantity</label>
+            {{ form.quantity|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Product Image -->
+        <div class="mb-3 w-50 text-start">
+            <label for="image" class="form-label">Product Image</label>
+            {{ form.image|add_class:"form-control" }}  <!-- Adding custom class -->
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="w-50 mb-3">
+            <button type="submit" class="btn btn-success w-100">Save Changes</button>
+        </div>
+        <div class="w-50">
+            <a href="{% url 'farmer_dashboard' %}" class="btn btn-secondary w-100">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

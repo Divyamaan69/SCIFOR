@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h2>Your Messages</h2>
+
+    {% if messages %}
+    <table class="table table-striped mx-auto" style="width: 80%;"> <!-- Table with 80% width -->
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+            <tr>
+                <td>{{ message.sender.username }}</td>
+                <td>{{ message.message }}</td>
+                <td>
+                    <a href="{% url 'respond_to_message' message.id %}" class="btn btn-warning w-100">Reply</a> <!-- Full width button -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No messages yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
